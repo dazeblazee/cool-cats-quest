@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rbody;
     [SerializeField] Animator anim;
+    [SerializeField] public GameManager gameManager;
 
     private float horizInput;           // store horizontal input for used in FixedUpdate()
     private float moveSpeed = 450.0f;   // 4.5 * 100 newtons
@@ -22,10 +23,14 @@ public class PlayerController : MonoBehaviour
     private int jumpMax = 1;            // # of jumps player can do without touching ground
     private int jumpsAvailable = 0;     // current jumps available to player
 
+    [SerializeField] public int health;
+
     private bool facingRight = true;    // true if facing right
 
     private void Start()
     {
+        //health = 9999;
+
         // calculate gravity using gravity formula
         float timeToApex = jumpTime / 2.0f;
         float gravity = (-2 * jumpHeight) / Mathf.Pow(timeToApex, 2);
@@ -62,12 +67,20 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
-        // Flip player if appropriate
+        // flip player if appropriate
         if ((facingRight && horizInput < -0.01) ||
             (!facingRight && horizInput > 0.01))
         {
             Flip();
         }
+
+        // check if player has fallen off level
+        if (rbody.transform.position.y < -12)
+        {
+            health = 0;
+            gameManager.RespawnPlayer();
+        }
+        
     }
 
     private void OnDrawGizmos()
@@ -96,5 +109,16 @@ public class PlayerController : MonoBehaviour
         // flip the direction the player is facing
         facingRight = !facingRight;
         transform.Rotate(Vector3.up, 180);
+    }
+
+    public void Hit(int damageDone)
+    {
+        health -= damageDone;
+        Debug.Log("Health: " + health);
+
+        if (health <= 0)
+        {
+            gameManager.RespawnPlayer();
+        }
     }
 }

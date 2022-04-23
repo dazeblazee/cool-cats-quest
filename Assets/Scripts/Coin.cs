@@ -6,20 +6,17 @@ using TMPro;
 
 public class Coin : MonoBehaviour
 {
-    bool isCollected = false;
-    int points = 50;
+    [SerializeField] public UIManager UIManager;
 
-    void Update()
-    {
-        
-    }
+    bool isCollected = false;
+    int points = 200;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
             isCollected = true;
-            Debug.Log("Coin collected");
+            UIManager.UpdateScore(points);
             Destroy(gameObject);
         }   
     }
