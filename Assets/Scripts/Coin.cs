@@ -11,9 +11,9 @@ public class Coin : MonoBehaviour
     bool isCollected = false;
     int points = 200;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (collision.gameObject.tag.Equals("Player"))
+        if (col.gameObject.tag.Equals("Player"))
         {
             isCollected = true;
             UIManager.UpdateScore(points);

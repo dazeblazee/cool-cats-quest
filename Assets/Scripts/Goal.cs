@@ -13,7 +13,7 @@ public class Goal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag.Equals("Player"))
+        if (collider.gameObject.tag.Equals("Player") && !goalReached)
         {
             goalReached = true;
             Debug.Log("Level complete");

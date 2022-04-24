@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerCollide : MonoBehaviour
 {
-    [SerializeField] public GameManager gameManager;
+    public GameManager gameManager;
+    public int damageDone;
 
     void Start()
     {
@@ -20,8 +21,7 @@ public class PlayerCollide : MonoBehaviour
     {
         if (other.name == "Player")
         {
-            gameManager.PlayerDamageTaken(100);
-            //gameManager.RespawnPlayer();
+            gameManager.PlayerDamageTaken(damageDone);
         }
     }
 }

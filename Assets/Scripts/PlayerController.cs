@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private int jumpMax = 1;            // # of jumps player can do without touching ground
     private int jumpsAvailable = 0;     // current jumps available to player
 
-    [SerializeField] public int health;
+    public int health;
 
     private bool facingRight = true;    // true if facing right
 
@@ -114,11 +114,11 @@ public class PlayerController : MonoBehaviour
     public void Hit(int damageDone)
     {
         health -= damageDone;
-        Debug.Log("Health: " + health);
 
         if (health <= 0)
         {
-            gameManager.RespawnPlayer();
+            health = 0;
+            gameManager.Death();
         }
     }
 }

@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI HPText;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private PauseMenuScreen pauseMenu;
+
     private int HP;
     public int score;
 
@@ -17,6 +19,15 @@ public class UIManager : MonoBehaviour
 
         HPText.text = "HP: " + HP + " / 9999";
         scoreText.text = "Score: " + score;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !pauseMenu.IsActive())
+        {
+            SetGameActive(false);
+            pauseMenu.Open();
+        }
     }
 
     public void UpdateHP(int damage)
@@ -40,6 +51,22 @@ public class UIManager : MonoBehaviour
     public void SetHP(int health)
     {
         HP = health;
+    }
+
+    public void SetGameActive(bool active)
+    {
+        if (active)
+        {
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
 }
