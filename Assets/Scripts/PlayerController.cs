@@ -24,12 +24,13 @@ public class PlayerController : MonoBehaviour
     private int jumpsAvailable = 0;     // current jumps available to player
 
     public int health;
+    public int maxHealth = 2000;
 
     private bool facingRight = true;    // true if facing right
 
     private void Start()
     {
-        //health = 9999;
+        health = maxHealth;
 
         // calculate gravity using gravity formula
         float timeToApex = jumpTime / 2.0f;
@@ -102,6 +103,7 @@ public class PlayerController : MonoBehaviour
         rbody.velocity = new Vector2(rbody.velocity.x, initialJumpVelocity);
         jumpsAvailable--;
         anim.SetTrigger("jump");
+        FindObjectOfType<AudioManager>().Play("jump");
     }
 
     void Flip()

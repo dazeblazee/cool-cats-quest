@@ -12,12 +12,15 @@ public class GameManager : MonoBehaviour
 
     private PlayerController player;
     private int respawnDelay = 2;
+    private int playerTotalDamageTaken;
 
     void Start()
     {
+        playerTotalDamageTaken = 0;
+
         player = FindObjectOfType<PlayerController>();
         PlayerController playerController = player.GetComponent<PlayerController>();
-        UIManager.SetHP(playerController.health);
+        setHP();
     }
 
     public void RespawnPlayer()
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDamageTaken(int damage)
     {
+        playerTotalDamageTaken += damage;
         player.Hit(damage);
         UIManager.UpdateHP(damage);
     }
@@ -62,7 +66,15 @@ public class GameManager : MonoBehaviour
 
     public void GoalReached()
     {
-        UIManager.UpdateScore(10000);
+        UIManager.UpdateScore(10000, playerTotalDamageTaken);
+        Debug.Log(playerTotalDamageTaken);
         UIManager.SetupGoalMenu();
+    }
+
+    public void setHP()
+    {
+        player.health = player.maxHealth;
+        UIManager.SetHP(player.health);
+        UIManager.SetMaxHP(player.maxHealth);
     }
 }

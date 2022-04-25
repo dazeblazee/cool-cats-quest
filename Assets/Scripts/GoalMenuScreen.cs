@@ -11,6 +11,8 @@ public class GoalMenuScreen : MonoBehaviour
     public TextMeshProUGUI scoreText;
 
     int goalScore;
+    int HPremain;
+    int damageTaken;
 
     public void Open(int score)
     {
@@ -22,9 +24,8 @@ public class GoalMenuScreen : MonoBehaviour
 
     public int CalcScore(int finalScore)
     {
-        
+        HPremain = UIManager.GetHP();
         goalScore = UIManager.GetScore();
-        Debug.Log(goalScore);
         return goalScore;
     }
 

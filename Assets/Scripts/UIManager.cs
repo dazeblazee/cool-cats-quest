@@ -13,13 +13,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private DeathMenuScreen deathMenu;
 
     private int HP;
+    private int maxHP;
     public int score;
 
     void Start()
     {
         score = 0;
 
-        HPText.text = "HP: " + HP + " / 9999";
+        HPText.text = "HP: " + HP + " / " + maxHP;
         scoreText.text = "Score: " + score;
     }
 
@@ -35,12 +36,40 @@ public class UIManager : MonoBehaviour
     public void UpdateHP(int damage)
     {
         HP -= damage;
-        HPText.text = "HP: " + HP.ToString() + "/ 9999"; 
+        if (HP > 0)
+        {
+            HPText.text = "HP: " + HP + " / " + maxHP;
+        }
+        else
+        {
+            HPText.text = "HP: " + 0 + " / " + maxHP;
+        }
+    }
+
+    public void SetHP(int health)
+    {
+        HP = health;
+    }
+
+    public int GetHP()
+    {
+        return HP;
+    }
+
+    public void SetMaxHP(int maxHealth)
+    {
+        maxHP = maxHealth;
     }
 
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
+        scoreText.text = "Score: " + score.ToString();
+    }
+
+    public void UpdateScore(int scoreToAdd, int totalDamageTaken)
+    {
+        score += scoreToAdd + (totalDamageTaken * 5);
         scoreText.text = "Score: " + score.ToString();
     }
 
@@ -53,16 +82,6 @@ public class UIManager : MonoBehaviour
     public int GetScore()
     {
         return score;
-    }
-
-    public void SetHP(int health)
-    {
-        HP = health;
-    }
-
-    public int GetHP()
-    {
-        return HP;
     }
 
     public void SetGameActive(bool active)
