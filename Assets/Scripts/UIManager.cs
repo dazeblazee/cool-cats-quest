@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI HPText;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private PauseMenuScreen pauseMenu;
+    [SerializeField] private GoalMenuScreen goalMenu;
+    [SerializeField] private DeathMenuScreen deathMenu;
 
     private int HP;
     public int score;
@@ -23,7 +25,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !pauseMenu.IsActive())
+        if (Input.GetKeyDown(KeyCode.Escape) && !pauseMenu.IsActive() && !goalMenu.IsActive())
         {
             SetGameActive(false);
             pauseMenu.Open();
@@ -48,9 +50,19 @@ public class UIManager : MonoBehaviour
         scoreText.text = "Score: " + score.ToString();
     }
 
+    public int GetScore()
+    {
+        return score;
+    }
+
     public void SetHP(int health)
     {
         HP = health;
+    }
+
+    public int GetHP()
+    {
+        return HP;
     }
 
     public void SetGameActive(bool active)
@@ -58,15 +70,22 @@ public class UIManager : MonoBehaviour
         if (active)
         {
             Time.timeScale = 1;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
         else
         {
             Time.timeScale = 0;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
         }
+    }
+
+    public void SetupGoalMenu()
+    {
+        goalMenu.Open(score);
+        SetGameActive(false);
+    }
+
+    public void setupDeathMenu()
+    {
+        deathMenu.Setup(score);
     }
 
 }

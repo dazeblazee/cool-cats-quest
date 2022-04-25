@@ -13,18 +13,11 @@ public class GameManager : MonoBehaviour
     private PlayerController player;
     private int respawnDelay = 2;
 
-    public DeathMenuScreen deathMenuScreen;
-
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
         PlayerController playerController = player.GetComponent<PlayerController>();
         UIManager.SetHP(playerController.health);
-    }
-
-    void Update()
-    {
-        
     }
 
     public void RespawnPlayer()
@@ -34,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Respawn()
     {
-        
+        UIManager.ResetScore();
         yield return new WaitForSeconds(respawnDelay);
         player.GetComponent<Rigidbody2D>().gravityScale = -9.81f;
         Debug.Log("Player respawn");
@@ -58,7 +51,18 @@ public class GameManager : MonoBehaviour
         player.GetComponent<Renderer>().enabled = false;
         player.GetComponent<Rigidbody2D>().gravityScale = 0f;
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        UIManager.ResetScore();
-        deathMenuScreen.Setup(0);
+        StartCoroutine(ShowDeathMenu());
+    }
+
+    IEnumerator ShowDeathMenu()
+    {
+        yield return new WaitForSeconds(1);
+        UIManager.setupDeathMenu();
+    }
+
+    public void GoalReached()
+    {
+        UIManager.UpdateScore(10000);
+        UIManager.SetupGoalMenu();
     }
 }

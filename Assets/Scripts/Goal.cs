@@ -6,7 +6,7 @@ using TMPro;
 
 public class Goal : MonoBehaviour
 {
-    [SerializeField] public UIManager UIManager;
+    [SerializeField] public GameManager gameManager;
 
     bool goalReached = false;
     int points = 10000;
@@ -16,8 +16,7 @@ public class Goal : MonoBehaviour
         if (collider.gameObject.tag.Equals("Player") && !goalReached)
         {
             goalReached = true;
-            Debug.Log("Level complete");
-            UIManager.UpdateScore(points);
+            gameManager.GoalReached();
         }
     }
 }

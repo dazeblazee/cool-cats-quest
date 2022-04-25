@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         if (rbody.transform.position.y < -12)
         {
             health = 0;
-            gameManager.RespawnPlayer();
+            gameManager.Death();
         }
         
     }

@@ -9,8 +9,6 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         Time.timeScale = 1;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         Application.LoadLevel("Level0");
 
     }
