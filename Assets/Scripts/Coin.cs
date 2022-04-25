@@ -16,6 +16,7 @@ public class Coin : MonoBehaviour
         if (col.gameObject.tag.Equals("Player"))
         {
             isCollected = true;
+            FindObjectOfType<AudioManager>().Play("coin");
             UIManager.UpdateScore(points);
             Destroy(gameObject);
         }   

@@ -16,6 +16,8 @@ public class Goal : MonoBehaviour
         if (collider.gameObject.tag.Equals("Player") && !goalReached)
         {
             goalReached = true;
+            FindObjectOfType<AudioManager>().Stop("gameBG");
+            FindObjectOfType<AudioManager>().Play("level_complete");
             gameManager.GoalReached();
         }
     }

@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
         if (rbody.transform.position.y < -12)
         {
             health = 0;
+            FindObjectOfType<AudioManager>().Play("death");
             gameManager.Death();
         }
         
@@ -116,10 +117,12 @@ public class PlayerController : MonoBehaviour
     public void Hit(int damageDone)
     {
         health -= damageDone;
+        FindObjectOfType<AudioManager>().Play("hit");
 
         if (health <= 0)
         {
             health = 0;
+            FindObjectOfType<AudioManager>().Play("death");
             gameManager.Death();
         }
     }

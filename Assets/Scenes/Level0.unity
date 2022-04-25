@@ -4400,6 +4400,22 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 8d718e8b31ad630478f598446d6717d8, type: 3}
     volume: 1
     source: {fileID: 0}
+  - name: hit
+    clip: {fileID: 8300000, guid: a50268b7d9b2be54296538ebf7f2f56b, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: coin
+    clip: {fileID: 8300000, guid: 7506d7977fb703a4f854da9c179e88c9, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: level_complete
+    clip: {fileID: 8300000, guid: dd797cd8db5ab444aa3aa2931169cbbe, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: death
+    clip: {fileID: 8300000, guid: 1382ec83bc142644b917630c5536cfc2, type: 3}
+    volume: 1
+    source: {fileID: 0}
 --- !u!1 &598206612
 GameObject:
   m_ObjectHideFlags: 0
