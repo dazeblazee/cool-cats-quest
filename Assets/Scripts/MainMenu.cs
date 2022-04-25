@@ -1,10 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
-    //public string startLevel;
+    [SerializeField] private TextMeshProUGUI highScoreText;
+
+    public int highScore = 0;
+
+    void Start()
+    {
+        highScore = PlayerPrefs.GetInt("highscore", 0);
+        highScoreText.text = highScore.ToString();
+    }
 
     public void NewGame()
     {

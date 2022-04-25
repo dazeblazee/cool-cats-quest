@@ -84,6 +84,11 @@ public class UIManager : MonoBehaviour
         return score;
     }
 
+    public void SetScore(int newScore)
+    {
+        scoreText.text = "Score: " + newScore.ToString();
+    }
+
     public void SetGameActive(bool active)
     {
         if (active)

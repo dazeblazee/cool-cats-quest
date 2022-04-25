@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private int jumpsAvailable = 0;     // current jumps available to player
 
     public int health;
-    public int maxHealth = 2000;
+    public int maxHealth = 1400;
 
     private bool facingRight = true;    // true if facing right
 

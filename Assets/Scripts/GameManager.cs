@@ -67,7 +67,6 @@ public class GameManager : MonoBehaviour
     public void GoalReached()
     {
         UIManager.UpdateScore(10000, playerTotalDamageTaken);
-        Debug.Log(playerTotalDamageTaken);
         UIManager.SetupGoalMenu();
     }
 
